@@ -2,15 +2,19 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-
 def delete_description(image: cv2.Mat, size: int) -> cv2.Mat:
     height = image.shape[0]
     image_with_deleted_description = image[:height-size, :]
     return image_with_deleted_description
 
+def rgb_to_gray(image: cv2.Mat) -> cv2.Mat:
+    if len(image.shape) != 2: image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    else: image_gray = image
+    return image_gray
+
 def get_size_for_crop(image: cv2.Mat) -> int:
     height = image.shape[0]
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image_gray = rgb_to_gray(image)
 
     # intesity of pixels on the y axis
     intensity_y, y = [], []
@@ -51,7 +55,7 @@ def filter_image(image: cv2.Mat, filter: str, average_ksize=5, median_ksize=7,
     return filtered_image
 
 def plot_intensity_dist(image: cv2.Mat, bins: int, figsize: tuple):
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image_gray = rgb_to_gray(image)
 
     plt.figure(figsize=figsize)
     plt.title('Intensity histogram')
@@ -87,7 +91,7 @@ def detect_edges(image: cv2.Mat, algorithm: str, gauss_ksize=3, sobel_ksize=5,
                 dx=1, dy=1, treshold1=100, treshold2=200):
     
     if algorithm == 'Sobel':
-        image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image_gray = rgb_to_gray(image)
 
         if sobel_ksize not in (1, 3, 5, 7):
             sobel_ksize = 5
