@@ -1,4 +1,14 @@
 __pycache__
 biofilm_formation_images
 Pseudonomas veronii
+valid_bf_imgs_dir_png
+valid_bf_imgs_masks_dir_png
+valid_bf_imgs_masks_dir_png_Holicheva
+valid_bf_imgs_masks_dir_png_Holicheva_old
+SegmentationClass
+
+validation_segmentation.zip
 find_contours.py
+connected_components.ipynb
+task2.ipynb
+result_Jaccard_Holicheva_old.html
